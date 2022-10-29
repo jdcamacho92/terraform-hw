@@ -94,6 +94,7 @@ resource "google_compute_instance" "debian_vm" {
 
   metadata = {
     ssh-keys = "${split("@", data.google_client_openid_userinfo.me.email)[0]}:${tls_private_key.ssh.public_key_openssh}"
+    metadata_startup-script = file("runapp.sh")
   }
 
   boot_disk {
